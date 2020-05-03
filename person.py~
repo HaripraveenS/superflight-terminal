@@ -1,0 +1,73 @@
+import signal, os
+import numpy as np
+import time
+from back import *
+from getch import _getChUnix as getChar
+from alarmexception import AlarmException
+
+class person(back):
+
+    jeta = rowx/2 - 1
+    jetb = 0
+        # self.A = '('
+        # self.B = "''"
+        # self.C = ')'
+        # self.D = '|'
+        # self.E = '|'
+        def placejetpack(self,rowx):
+            background.bg[rowx/2 - 1][0] = 'O'
+                background.bg[rowx/2 ][0] = 'O'
+
+        def moveperson(self):
+            def alarmhandler(signum, frame):
+                raise AlarmException
+
+        def user_input(timeout=0.1):
+            # ''' input method '''
+            signal.signal(signal.SIGALRM, alarmhandler)
+            signal.setitimer(signal.ITIMER_REAL, timeout)
+            try:
+                text = getChar()()
+                signal.alarm(0)
+                return text
+            except AlarmException:
+                pass
+            signal.signal(signal.SIGALRM, signal.SIG_IGN)
+            return ''
+
+        char = user_input()
+
+        if char == 'w':
+            background.bg[jeta][jetb] = ' '
+                background.bg[jeta + 1][jetb] = ' '
+                background.bg[jeta - 2][jetb] = 'O'
+                background.bg[jeta - 1][jetb] = 'O'
+                person.jeta -= 2;
+                # person.jetb += 1;
+
+                if char == 's':
+                    background.bg[jeta][jetb] = ' '
+                background.bg[jeta + 1][jetb] = ' '
+                background.bg[jeta + 2][jetb] = 'O'
+                background.bg[jeta + 3][jetb] = 'O'
+                person.jeta += 2;
+
+
+        if char == 'a':
+            background.bg[jeta][jetb] = ' '
+                background.bg[jeta + 1][jetb] = ' '
+                background.bg[jeta][jetb - 1] = 'O'
+                background.bg[jeta + 1][jetb - 1] = 'O'
+                person.jetb -= 1;
+
+
+        if char == 'd':
+            background.bg[jeta][jetb] = ' '
+                background.bg[jeta + 1][jetb] = ' '
+                background.bg[jeta][jetb + 1] = 'O'
+                background.bg[jeta + 1][jetb + 1] = 'O'
+                person.jetb += 1;
+
+
+
+

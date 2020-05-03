@@ -1,0 +1,14 @@
+from background import bg
+
+class strt_obstacle:
+    def __init__(self ,st_x,st_y):
+        self.obs_st_x = st_x
+        self.obs_st_y = st_y
+        for i in range(obs_st_x , obs_st_x + 20):
+            bg.canvas[i][obs_st_y] = '|'
+            bg.canvas[i][obs_st_y + 1] = '|'
+
+
+
+
+
